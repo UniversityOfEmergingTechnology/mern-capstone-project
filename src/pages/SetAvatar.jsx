@@ -46,46 +46,34 @@ export default function SetAvatar() {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = [];
-  //     for (let i = 0; i < 4; i++) {
-  //       const image = await axios.get(
-  //         `${api}/${Math.round(Math.random() * 1000)}`
-  //       );
-  //       const buffer = Buffer.from(image.data, 'binary');
-  //       data.push(buffer.toString("base64"));
-  //     }
-  //     setAvatars(data);
-  //     setIsLoading(false);
-  //   };
-    
-  //   fetchData();
-  // }, []);
-  useEffect(()=>{
-    if(!localStorage.getItem('chat-app-user')){
-      navigate('/login')
-    }
-  },[])
+
+
+
   useEffect(() => {
-    const data = [];
-    for (let i = 0; i < 4; i++) {
-      axios
-        .get(`${api}/${Math.round(Math.random() * 1000)}`, {
-          responseType: 'text', // Make sure we get the response as text
-        })
-        .then((response) => {
-          data.push(response.data);
-          if (data.length === 4) { // When we have fetched all 4 images
-            setAvatars(data);
-            setIsLoading(false);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    if (!localStorage.getItem('chat-app-user')) {
+      navigate('/login');
+      return; // Prevents the rest of the code from executing.
     }
-  }, []);
+  
+    const fetchAvatars = async () => {
+      try {
+        const avatarPromises = Array.from({ length: 4 }, () =>
+          axios.get(`${api}/${Math.round(Math.random() * 1000)}`, { responseType: 'text' })
+        );
+  
+        const avatarResponses = await Promise.all(avatarPromises);
+        const data = avatarResponses.map((response) => response.data);
+  
+        setAvatars(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchAvatars();
+  }, [navigate, api]);
+  
   
   return (
     <>

@@ -89,7 +89,7 @@ const Login = () => {
     if(localStorage.getItem('chat-app-user')){
       navigate('/')
     }
-  },[])
+  },[navigate])
 
   const [values , setValues] = useState({
     userName : "",
@@ -105,11 +105,11 @@ const Login = () => {
                 userName,
             })
             if(response.data.success === false){
-                toast.error("User Registration failed")
+                toast.error("Login  failed")
             }
             else{
                 localStorage.setItem('chat-app-user' , JSON.stringify(response.data.newUserObject))
-                toast.success("User Registered successfully")
+                toast.success("Logged in successfully")
                 navigate('/')
             }
         } catch(err) {
@@ -126,7 +126,7 @@ const Login = () => {
 
   const handleValidation = () => {
     const {password ,  userName }   = values;
-    if(password !== ""){
+    if(password === ""){
         toast.error("Password is needed")
         return false;
     } 
