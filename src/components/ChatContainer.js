@@ -19,6 +19,7 @@ export default function ChatContainer({ currentChat, socket }) {
         to: currentChat._id,
       });
       setMessages(response.data);
+      console.log(response.data)
     };
     fetchData();
   }, [currentChat]);
@@ -40,13 +41,6 @@ export default function ChatContainer({ currentChat, socket }) {
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
-
-    // Clean up event listener when the component unmounts
-    // return () => {
-    //   if (socket.current) {
-    //     socket.current.off("msg-recieve");
-    //   }
-    // };
   }, [socket]);
 
   useEffect(() => {
