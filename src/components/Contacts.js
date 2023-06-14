@@ -8,12 +8,14 @@ export default function Contacts({ contacts, changeChat }) {
   const [currentSelected, setCurrentSelected] = useState(undefined);
 
   useEffect(() => {
-    const setContact = async () => {
-      const data = await JSON.parse(localStorage.getItem("chat-app-user"));
-      setCurrentUserName(data.userName);
-      setCurrentUserImage(data.avatarImage);
-    };
-    setContact();
+    if (localStorage.getItem("chat-app-user")) {
+      const setContact = async () => {
+        const data = await JSON.parse(localStorage.getItem("chat-app-user"));
+        setCurrentUserName(data.userName);
+        setCurrentUserImage(data.avatarImage);
+      };
+      setContact();
+    }
   }, []);
 
   const changeCurrentChat = (index, contact) => {
@@ -72,9 +74,9 @@ export default function Contacts({ contacts, changeChat }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 15% 70% 15%;
+  grid-template-rows: 15% 75% 10%;
   overflow: hidden;
-  background-color: #f0f0f0; /* Light grey background */
+  background-color: #121212; /* black background */
 
   .brand {
     display: flex;
@@ -85,11 +87,10 @@ const Container = styled.div`
       height: 2rem;
     }
     h3 {
-      color: #0D47A1; /* Dark grey text */
+      color: #00bfff; /* unique blue text */
       text-transform: uppercase;
       font-size: 24px;
       font-weight: bolder;
-
     }
   }
 
@@ -102,13 +103,13 @@ const Container = styled.div`
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #cfcfcf; /* Grey scrollbar */
+        background-color: #cfcfcf; /* grey scrollbar */
         width: 0.1rem;
         border-radius: 1rem;
       }
     }
     .contact {
-      background-color: #ffffff; /* White background for contacts */
+      background-color: #212121; /* dark grey background for contacts */
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
@@ -118,6 +119,9 @@ const Container = styled.div`
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
+      &:hover {
+        background-color: #1a1a1a; /* darker grey for hover */
+      }
       .avatar {
         img {
           height: 3rem;
@@ -125,21 +129,26 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: #383838; /* Dark grey text */
+          color: #696969; /* cyan text */
         }
       }
     }
     .selected {
-      background-color: #6db3f2; /* Light blue selection */
+      background-color: #1a1a1a;
+      .username {
+        h3 {
+          color: #ffff00;
+        }
+      }
     }
   }
 
   .current-user {
-    background-color: #e7e7e7; /* Light grey for current user background */
+    background-color: #1a1a1a; /* dark grey for current user background */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: 2rem;
     .avatar {
       img {
         height: 4rem;
@@ -148,7 +157,7 @@ const Container = styled.div`
     }
     .username {
       h2 {
-        color: #383838; /* Dark grey text */
+        color: #f47670; /* pink color for current user's name */
       }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {

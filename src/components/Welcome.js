@@ -26,32 +26,34 @@ export default function Welcome() {
 }
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: #f0f0f0; /* Light grey background */
-  color: #383838; /* Dark grey text */
-  padding: 2rem; /* Padding all around */
-  border-radius: 15px; /* Soft rounded corners */
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  text-align: center; /* Center text */
+  background-color: #121212; /* black background */
+  color: #E0E0E0; /* Light text for visibility */
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow for depth */
+  text-align: center;
 
   img {
     height: 20rem;
-    margin-bottom: 2rem; /* Add some space below the image */
+    margin-bottom: 2rem;
   }
 
   h1 {
-    font-size: 2rem; /* Larger font for the welcome message */
-    margin-bottom: 1rem; /* Add some space below the heading */
+    font-size: 2.5rem; /* Larger font for the welcome message */
+    color: #7B68EE; /* Unique color for the heading */
+    margin-bottom: 1rem;
   }
 
   h3 {
-    font-size: 1.25rem; /* Slightly larger font for instructions */
-    color: #888888; /* Grey for less important text */
+    font-size: 1.5rem; /* Slightly larger font for instructions */
+    color: #C0C0C0; /* Lighter grey for less important text */
   }
 
   span {
-    color: #6db3f2; /* Light blue for username */
+    color: #00FFFF; /* Cyan for username */
+    font-weight: bold; /* Bold username */
   }
 `;
